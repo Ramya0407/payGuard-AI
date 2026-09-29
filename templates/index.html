@@ -10,15 +10,15 @@
   <aside class="sidebar">
     <div class="logo">🛡️ PayGuard<span>-AI</span></div>
     <nav>
-      <a href="#dashboard">📊 Dashboard</a>
-      <a href="#analyze">🔍 Analyze</a>
-      <a href="#history">🕘 History</a>
-    </nav>
+  <a href="#dashboard" class="nav-link active" data-page="dashboard">📊 Dashboard</a>
+  <a href="#analyze" class="nav-link" data-page="analyze">🔍 Analyze</a>
+  <a href="#history" class="nav-link" data-page="history">🕘 History</a>
+</nav>
     <div class="pill">● Rule engine active</div>
   </aside>
 
   <div class="content">
-    <section id="dashboard">
+    <section id="dashboard" class="page-view active">
       <div class="topbar">
         <div><h1>Payment Risk Analytics</h1><p class="muted">Pre-payment scam checks from your analyzed transactions</p></div>
         <a class="btn" href="#analyze">+ New check</a>
@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <section id="analyze" class="grid two">
+    <section id="analyze" class="page-view grid two">
       <div class="card">
         <h3>Transaction details</h3>
         <form id="txForm">
@@ -88,7 +88,7 @@
       </div>
     </section>
 
-    <section id="history">
+    <section id="history" class="page-view">
       <h3>Transaction history</h3>
       <div class="card table-wrap">
         <table>
@@ -101,5 +101,44 @@
     <footer>Hackathon prototype using rule-based scoring. It cannot guarantee a payment is safe or fraudulent. Never share your OTP or PIN.</footer>
   </div>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+  const navLinks = document.querySelectorAll(".nav-link");
+  const pages = document.querySelectorAll(".page-view");
+
+  function showPage(pageName) {
+    pages.forEach((page) => {
+      page.classList.toggle("active", page.id === pageName);
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle(
+        "active",
+        link.dataset.page === pageName
+      );
+    });
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const pageName = link.dataset.page;
+      showPage(pageName);
+      history.replaceState(null, "", "#" + pageName);
+    });
+  });
+
+  document.querySelectorAll('a[href="#analyze"]:not(.nav-link)').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      showPage("analyze");
+      history.replaceState(null, "", "#analyze");
+    });
+  });
+
+  const initialPage = window.location.hash.slice(1);
+  showPage(["dashboard", "analyze", "history"].includes(initialPage)
+    ? initialPage
+    : "dashboard");
+</script>
 </body>
 </html>

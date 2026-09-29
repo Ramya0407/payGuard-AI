@@ -62,3 +62,160 @@ footer { color:var(--muted); font-size:.8rem; text-align:center; padding-top:8px
   .content { margin-left:0; padding:16px; }
   .grid.row2, .grid.row3 { grid-template-columns:1fr; }
 }
+/* ===== PayGuard-AI Professional Design Upgrade ===== */
+
+/* Smooth transitions */
+.card,
+.btn,
+.sidebar nav a {
+  transition: all 0.25s ease;
+}
+
+/* Sidebar polish */
+.sidebar {
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  letter-spacing: 0.4px;
+}
+
+.sidebar nav a:hover {
+  transform: translateX(4px);
+}
+
+/* Main content spacing */
+.content {
+  padding-top: 30px;
+}
+
+/* Cards */
+.card {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card:hover {
+  border-color: #334779;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+/* Statistics */
+.stat span {
+  display: inline-block;
+  margin-top: 8px;
+  letter-spacing: -1px;
+}
+
+.stat small {
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+}
+
+/* Form inputs */
+input[type=text],
+input[type=number],
+select {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Buttons */
+.btn {
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.18);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(59, 130, 246, 0.25);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Risk badges */
+.badge {
+  letter-spacing: 0.3px;
+  padding: 5px 12px;
+}
+
+/* Risk score panel */
+.score-num {
+  letter-spacing: -1.5px;
+}
+
+.bar {
+  border: 1px solid var(--line);
+}
+
+/* Advice box */
+.advice {
+  border-radius: 0 10px 10px 0;
+  line-height: 1.6;
+}
+
+/* History table */
+.table-wrap {
+  border-radius: 12px;
+}
+
+th {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(59, 130, 246, 0.06);
+}
+
+/* Footer */
+footer {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  padding: 18px 0;
+}
+
+/* Mobile improvements */
+@media (max-width: 600px) {
+  .content {
+    padding: 14px;
+  }
+
+  .card {
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  .sidebar nav a {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+}
+/* Separate page navigation */
+.page-view {
+  display: none;
+}
+
+.page-view.active {
+  display: block;
+}
+
+.page-view#analyze.active {
+  display: grid;
+}
+
+.sidebar nav a.active {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
