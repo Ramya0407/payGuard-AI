@@ -1,144 +1,627 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PayGuard-AI</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
+
+  <!-- ================= SIDEBAR ================= -->
+
   <aside class="sidebar">
-    <div class="logo">🛡️ PayGuard<span>-AI</span></div>
+
+    <div class="logo">
+      🛡️ PayGuard<span>-AI</span>
+    </div>
+
     <nav>
-  <a href="#dashboard" class="nav-link active" data-page="dashboard">📊 Dashboard</a>
-  <a href="#analyze" class="nav-link" data-page="analyze">🔍 Analyze</a>
-  <a href="#history" class="nav-link" data-page="history">🕘 History</a>
-</nav>
-    <div class="pill">● Rule engine active</div>
+
+      <a href="#dashboard"
+         class="nav-link active"
+         data-page="dashboard">
+        📊 Dashboard
+      </a>
+
+      <a href="#analyze"
+         class="nav-link"
+         data-page="analyze">
+        🔍 Analyze
+      </a>
+
+      <a href="#history"
+         class="nav-link"
+         data-page="history">
+        🕘 History
+      </a>
+
+    </nav>
+
+    <div class="pill">
+      ● Rule engine active
+    </div>
+
   </aside>
 
+
+  <!-- ================= MAIN CONTENT ================= -->
+
   <div class="content">
-    <section id="dashboard" class="page-view active">
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard"
+             class="page-view active">
+
       <div class="topbar">
-        <div><h1>Payment Risk Analytics</h1><p class="muted">Pre-payment scam checks from your analyzed transactions</p></div>
-        <a class="btn" href="#analyze">+ New check</a>
+
+        <div>
+          <h1>Payment Risk Analytics</h1>
+
+          <p class="muted">
+            Pre-payment scam checks from your analyzed transactions
+          </p>
+        </div>
+
+        <a class="btn"
+           href="#analyze">
+          + New check
+        </a>
+
       </div>
+
+
+      <!-- STATS -->
 
       <div class="grid stats">
-        <div class="card stat"><small>Analyzed</small><span id="statTotal">0</span></div>
-        <div class="card stat high"><small>High risk</small><span id="statHigh">0</span></div>
-        <div class="card stat medium"><small>Medium risk</small><span id="statMedium">0</span></div>
-        <div class="card stat"><small>Avg risk score</small><span id="statAvg">0</span></div>
-        <div class="card stat"><small>High-risk amount</small><span id="statFlagged">₹0</span></div>
+
+        <div class="card stat">
+          <small>Analyzed</small>
+          <span id="statTotal">0</span>
+        </div>
+
+        <div class="card stat high">
+          <small>High risk</small>
+          <span id="statHigh">0</span>
+        </div>
+
+        <div class="card stat medium">
+          <small>Medium risk</small>
+          <span id="statMedium">0</span>
+        </div>
+
+        <div class="card stat">
+          <small>Avg risk score</small>
+          <span id="statAvg">0</span>
+        </div>
+
+        <div class="card stat">
+          <small>High-risk amount</small>
+          <span id="statFlagged">₹0</span>
+        </div>
+
       </div>
+
+
+      <!-- TIMELINE + ALERTS -->
 
       <div class="grid row2">
+
         <div class="card">
+
           <h3>Risk score timeline</h3>
-          <p class="muted sm">Last 20 analyses, oldest to newest</p>
+
+          <p class="muted sm">
+            Last 20 analyses, oldest to newest
+          </p>
+
           <div id="timeline"></div>
+
         </div>
+
+
         <div class="card">
+
           <h3>Recent alerts</h3>
-          <p class="muted sm">Latest Medium / High results</p>
+
+          <p class="muted sm">
+            Latest Medium / High results
+          </p>
+
           <div id="alerts"></div>
+
         </div>
+
       </div>
+
+
+      <!-- DISTRIBUTION -->
 
       <div class="grid row3">
-        <div class="card"><h3>Risk distribution</h3><div id="distBars"></div></div>
-        <div class="card"><h3>Top risk indicators</h3><div id="indBars"></div></div>
+
         <div class="card">
-          <h3>Scoring engine</h3>
-          <ul class="info">
-            <li><b>Method:</b> transparent rules</li>
-            <li><b>Machine learning:</b> not used</li>
-            <li><b>Output:</b> 0–100 score, Low / Medium / High</li>
-            <li><b>Limit:</b> sees only what the user enters</li>
-          </ul>
+
+          <h3>Risk distribution</h3>
+
+          <div id="distBars"></div>
+
         </div>
+
+
+        <div class="card">
+
+          <h3>Top risk indicators</h3>
+
+          <div id="indBars"></div>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>Scoring engine</h3>
+
+          <ul class="info">
+
+            <li>
+              <b>Method:</b>
+              transparent rules
+            </li>
+
+            <li>
+              <b>Machine learning:</b>
+              not used
+            </li>
+
+            <li>
+              <b>Output:</b>
+              0–100 score, Low / Medium / High
+            </li>
+
+            <li>
+              <b>Limit:</b>
+              sees only what the user enters
+            </li>
+
+          </ul>
+
+        </div>
+
       </div>
+
     </section>
 
-    <section id="analyze" class="page-view grid two">
+
+
+    <!-- ================= ANALYZE ================= -->
+
+    <section id="analyze"
+             class="page-view grid two">
+
+
+      <!-- LEFT SIDE -->
+
       <div class="card">
-        <h3>Transaction details</h3>
+
+        <h3>🔍 Security Analysis</h3>
+
+        <p class="muted">
+          Check transaction details, payment links and suspicious SMS messages.
+        </p>
+
+
         <form id="txForm">
-          <label for="amount">Amount (₹)</label>
-          <input type="number" id="amount" min="1" step="any" placeholder="e.g. 25000" required>
-          <label for="receiver">Receiver name</label>
-          <input type="text" id="receiver" maxlength="100" placeholder="e.g. Ravi Kumar" required>
-          <label for="payLink">Payment link / QR link (optional)</label>
-          <input type="text" id="payLink" maxlength="500" placeholder="Paste the link or the text from the QR code">
-          <label for="method">Payment method</label>
+
+
+          <!-- AMOUNT -->
+
+          <label for="amount">
+            Amount (₹)
+          </label>
+
+          <input
+            type="number"
+            id="amount"
+            min="1"
+            step="any"
+            placeholder="e.g. 25000"
+            required
+          >
+
+
+          <!-- RECEIVER -->
+
+          <label for="receiver">
+            Receiver name
+          </label>
+
+          <input
+            type="text"
+            id="receiver"
+            maxlength="100"
+            placeholder="e.g. Ravi Kumar"
+            required
+          >
+
+
+          <!-- PAYMENT LINK -->
+
+          <label for="payLink">
+            Payment link / QR link
+            <span class="muted">(optional)</span>
+          </label>
+
+          <input
+            type="text"
+            id="payLink"
+            maxlength="500"
+            placeholder="Paste payment / UPI / website link"
+          >
+
+
+          <!-- PAYMENT METHOD -->
+
+          <label for="method">
+            Payment method
+          </label>
+
           <select id="method">
-            <option>UPI</option><option>QR Code</option><option>Bank Transfer</option>
-            <option>Card</option><option>Wallet</option>
+
+            <option>UPI</option>
+
+            <option>QR Code</option>
+
+            <option>Bank Transfer</option>
+
+            <option>Card</option>
+
+            <option>Wallet</option>
+
           </select>
-          <label class="check"><input type="checkbox" id="newReceiver"> I have never paid this receiver before</label>
-          <label class="check"><input type="checkbox" id="urgent"> I'm being pressured to pay urgently</label>
-          <label class="check"><input type="checkbox" id="askedOtp"> Someone asked for my OTP / PIN</label>
-          <button type="submit" class="btn" id="submitBtn">Analyze risk</button>
-          <p id="formError" class="error"></p>
-        </form>
-      </div>
-      <div class="card">
-        <h3>Risk assessment</h3>
-        <div id="result" class="muted">Submit a transaction to see the result here.</div>
-      </div>
-    </section>
+          <!-- SMS SCAM ANALYZER -->
 
-    <section id="history" class="page-view">
-      <h3>Transaction history</h3>
-      <div class="card table-wrap">
-        <table>
-          <thead><tr><th>Date</th><th>Receiver</th><th>Amount</th><th>Method</th><th>Score</th><th>Risk</th></tr></thead>
-          <tbody id="historyBody"><tr><td colspan="6" class="muted">No transactions yet.</td></tr></tbody>
-        </table>
-      </div>
-    </section>
+<div class="security-section">
 
-    <footer>Hackathon prototype using rule-based scoring. It cannot guarantee a payment is safe or fraudulent. Never share your OTP or PIN.</footer>
+  <h4>📱 SMS Scam Analyzer</h4>
+
+  <p class="muted sm">
+    Received a suspicious SMS? Paste it below and
+    PayGuard-AI will check for common scam indicators.
+  </p>
+
+  <label for="smsMessage">
+    SMS message
+  </label>
+
+  <textarea
+    id="smsMessage"
+    maxlength="3000"
+    rows="7"
+    placeholder="Paste your suspicious SMS here..."
+  ></textarea>
+
+  <div class="sms-tip">
+    🛡️ <b>Safety tip:</b>
+    Never share OTP, PIN, CVV or passwords with anyone.
   </div>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-  <script>
-  const navLinks = document.querySelectorAll(".nav-link");
-  const pages = document.querySelectorAll(".page-view");
 
-  function showPage(pageName) {
-    pages.forEach((page) => {
-      page.classList.toggle("active", page.id === pageName);
-    });
+</div>
+
+          <!-- SMS ANALYZER -->
+
+          <div class="security-section">
+
+            <h4>
+              📱 SMS Scam Analyzer
+            </h4>
+
+            <p class="muted sm">
+              Received a suspicious SMS? Paste it below and PayGuard-AI
+              will check for common scam indicators.
+            </p>
+
+
+            <label for="smsMessage">
+              SMS message
+            </label>
+
+            <textarea
+              id="smsMessage"
+              maxlength="3000"
+              rows="7"
+              placeholder="Example: Your KYC has expired. Verify immediately to avoid account suspension..."
+            ></textarea>
+
+
+            <div class="sms-tip">
+
+              🛡️ <b>Safety tip:</b>
+              Never share OTP, PIN, CVV or passwords with anyone.
+
+            </div>
+
+          </div>
+
+
+          <!-- CHECKBOXES -->
+
+          <label class="check">
+
+            <input
+              type="checkbox"
+              id="newReceiver"
+            >
+
+            I have never paid this receiver before
+
+          </label>
+
+
+          <label class="check">
+
+            <input
+              type="checkbox"
+              id="urgent"
+            >
+
+            I'm being pressured to pay urgently
+
+          </label>
+
+
+          <label class="check">
+
+            <input
+              type="checkbox"
+              id="askedOtp"
+            >
+
+            Someone asked for my OTP / PIN
+
+          </label>
+
+
+          <!-- BUTTON -->
+
+          <button
+            type="submit"
+            class="btn"
+            id="submitBtn"
+          >
+            🛡️ Analyze Everything
+          </button>
+
+
+          <p
+            id="formError"
+            class="error">
+          </p>
+
+
+        </form>
+
+      </div>
+
+
+
+      <!-- RIGHT SIDE -->
+
+      <div class="card">
+
+        <h3>🛡️ Risk Assessment</h3>
+
+        <div
+          id="result"
+          class="muted">
+
+          <div class="empty-result">
+
+            <div class="empty-icon">
+              🔎
+            </div>
+
+            <h4>
+              Ready to analyze
+            </h4>
+
+            <p>
+              Enter your transaction details or paste a suspicious
+              SMS/link and click <b>Analyze Everything</b>.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= HISTORY ================= -->
+
+    <section id="history"
+             class="page-view">
+
+      <h3>
+        Transaction history
+      </h3>
+
+
+      <div class="card table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Date</th>
+
+              <th>Receiver</th>
+
+              <th>Amount</th>
+
+              <th>Method</th>
+
+              <th>Score</th>
+
+              <th>Risk</th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="historyBody">
+
+            <tr>
+
+              <td
+                colspan="6"
+                class="muted">
+
+                No transactions yet.
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+      Hackathon prototype using rule-based scoring.
+      It cannot guarantee a payment, SMS or link is safe or fraudulent.
+
+      <br>
+
+      <b>Never share your OTP, PIN, CVV or password.</b>
+
+    </footer>
+
+  </div>
+
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+  <script>
+
+    const navLinks =
+      document.querySelectorAll(".nav-link");
+
+    const pages =
+      document.querySelectorAll(".page-view");
+
+
+    function showPage(pageName) {
+
+      pages.forEach((page) => {
+
+        page.classList.toggle(
+          "active",
+          page.id === pageName
+        );
+
+      });
+
+
+      navLinks.forEach((link) => {
+
+        link.classList.toggle(
+          "active",
+          link.dataset.page === pageName
+        );
+
+      });
+
+    }
+
 
     navLinks.forEach((link) => {
-      link.classList.toggle(
-        "active",
-        link.dataset.page === pageName
-      );
-    });
-  }
 
-  navLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      const pageName = link.dataset.page;
-      showPage(pageName);
-      history.replaceState(null, "", "#" + pageName);
-    });
-  });
+      link.addEventListener("click", (event) => {
 
-  document.querySelectorAll('a[href="#analyze"]:not(.nav-link)').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      showPage("analyze");
-      history.replaceState(null, "", "#analyze");
-    });
-  });
+        event.preventDefault();
 
-  const initialPage = window.location.hash.slice(1);
-  showPage(["dashboard", "analyze", "history"].includes(initialPage)
-    ? initialPage
-    : "dashboard");
-</script>
+        const pageName =
+          link.dataset.page;
+
+        showPage(pageName);
+
+        history.replaceState(
+          null,
+          "",
+          "#" + pageName
+        );
+
+      });
+
+    });
+
+
+    document
+      .querySelectorAll(
+        'a[href="#analyze"]:not(.nav-link)'
+      )
+      .forEach((link) => {
+
+        link.addEventListener(
+          "click",
+          (event) => {
+
+            event.preventDefault();
+
+            showPage("analyze");
+
+            history.replaceState(
+              null,
+              "",
+              "#analyze"
+            );
+
+          }
+        );
+
+      });
+
+
+    const initialPage =
+      window.location.hash.slice(1);
+
+
+    showPage(
+      [
+        "dashboard",
+        "analyze",
+        "history"
+      ].includes(initialPage)
+        ? initialPage
+        : "dashboard"
+    );
+
+  </script>
+
 </body>
 </html>
