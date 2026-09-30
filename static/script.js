@@ -832,3 +832,50 @@ $("txForm").addEventListener(
 // =====================================================
 
 refreshAll();
+// =====================================================
+// QR CODE UI
+// =====================================================
+
+const methodSelect = $("method");
+const qrSection = $("qrSection");
+const qrImage = $("qrImage");
+const qrStatus = $("qrStatus");
+
+methodSelect.addEventListener("change", () => {
+
+  if (methodSelect.value === "QR Code") {
+
+    qrSection.style.display = "block";
+
+  } else {
+
+    qrSection.style.display = "none";
+
+    qrImage.value = "";
+
+    qrStatus.textContent = "";
+
+  }
+
+});
+
+
+if (qrImage) {
+
+  qrImage.addEventListener("change", () => {
+
+    if (qrImage.files.length > 0) {
+
+      qrStatus.textContent =
+        "✓ QR image selected: " +
+        qrImage.files[0].name;
+
+    } else {
+
+      qrStatus.textContent = "";
+
+    }
+
+  });
+
+}

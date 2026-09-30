@@ -285,6 +285,28 @@
 
             <option>SMS</option>
           </select>
+          <div id="qrSection" class="security-section" style="display:none;">
+
+  <h4>📷 QR Code Scanner</h4>
+
+  <p class="muted sm">
+    Upload a payment QR code. PayGuard-AI will extract
+    the QR information and check it for suspicious patterns.
+  </p>
+
+  <label for="qrImage">
+    Upload QR image
+  </label>
+
+  <input
+    type="file"
+    id="qrImage"
+    accept="image/*"
+  >
+
+  <p id="qrStatus" class="muted sm"></p>
+
+</div>
           <!-- SMS ANALYZER -->
 
           <div class="security-section">
